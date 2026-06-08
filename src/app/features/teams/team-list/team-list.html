@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h2>World Cup Teams</h2>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  
+  <div *ngIf="hasVoted" class="alert alert-info">
+    You have already cast your vote. Check <a routerLink="/my-vote">My Vote</a> to see it.
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+    <div class="col" *ngFor="let team of teams">
+      <div class="card h-100 shadow-sm">
+        <img [src]="team.flagImageUrl" class="card-img-top" alt="{{ team.teamName }} flag" *ngIf="team.flagImageUrl" style="height: 150px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ team.teamName }} ({{ team.teamCode }})</h5>
+          <p class="card-text text-muted">Group: {{ team.groupName }}</p>
+          <p class="card-text">{{ team.description }}</p>
+        </div>
+        <div class="card-footer bg-white border-top-0 d-grid">
+          <button class="btn btn-primary" (click)="vote(team.teamId)" [disabled]="hasVoted">Vote</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

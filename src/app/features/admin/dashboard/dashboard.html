@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>Admin Dashboard</h2>
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total Users</h5>
+          <h2 class="display-4">{{ users.length }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total Votes Cast</h5>
+          <h2 class="display-4">{{ polls.length }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Results Status</h5>
+          <h3 [class.text-success]="settings?.isResultPublished" [class.text-danger]="!settings?.isResultPublished">
+            {{ settings?.isResultPublished ? 'Published' : 'Hidden' }}
+          </h3>
+          <button class="btn btn-sm mt-2" [class.btn-warning]="settings?.isResultPublished" [class.btn-success]="!settings?.isResultPublished" (click)="togglePublish()">
+            {{ settings?.isResultPublished ? 'Hide Results' : 'Reveal Results' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+    <a routerLink="/admin/teams" class="btn btn-primary">Manage Teams</a>
+    <a routerLink="/results" class="btn btn-outline-primary">View Results Chart</a>
+  </div>
+</div>
