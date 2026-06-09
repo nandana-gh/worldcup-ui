@@ -17,6 +17,10 @@ export class DashboardComponent implements OnInit {
   polls: any[] = [];
   errorMessage = '';
 
+  // Pagination for Voting Log
+  currentPage = 1;
+  itemsPerPage = 5;
+
   constructor(
     private resultService: ResultService,
     private cdr: ChangeDetectorRef
@@ -46,6 +50,29 @@ export class DashboardComponent implements OnInit {
       this.resultService.hideResults().subscribe(() => this.loadData());
     } else {
       this.resultService.revealResults().subscribe(() => this.loadData());
+    }
+  }
+
+  get paginatedPolls() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.polls.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.polls.length / this.itemsPerPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.cdr.detectChanges();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.cdr.detectChanges();
     }
   }
 }
