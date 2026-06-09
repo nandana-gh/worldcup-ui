@@ -32,7 +32,7 @@ export class TeamListComponent implements OnInit {
   loadTeams() {
     this.teamService.getAllTeams().subscribe({
       next: (data) => {
-        this.teams = data;
+        this.teams = data.filter((t: any) => t.isActive);
         this.cdr.detectChanges();
       },
       error: (err) => {

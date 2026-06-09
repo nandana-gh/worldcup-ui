@@ -19,7 +19,6 @@
       <div class="card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">{{ team.teamName }} ({{ team.teamCode }})</h5>
-          <p class="card-text">{{ team.description }}</p>
         </div>
         <div class="card-footer bg-white border-top-0 d-grid">
           <button class="btn btn-primary" (click)="vote(team.teamId)" [disabled]="hasVoted">Vote</button>

@@ -11,6 +11,9 @@
     <div class="card-body text-center">
       <h3 class="card-title">{{ team.teamName }}</h3>
       <h5 class="text-muted">{{ team.teamCode }}</h5>
+      <div class="alert alert-danger mt-3" *ngIf="!team.isActive">
+        The team you voted for is not active at the moment
+      </div>
       <p class="mt-3 text-success"><strong>Voted on:</strong> {{ vote.votedAt | date:'medium' }}</p>
     </div>
   </div>
