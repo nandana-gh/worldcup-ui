@@ -3,3 +3,44 @@
 body {
     background-color: #f8f9fa;
 }
+
+:root {
+    --bs-primary: #fd7e14;
+    --bs-primary-rgb: 253, 126, 20;
+    --bs-link-color: #fd7e14;
+    --bs-link-color-rgb: 253, 126, 20;
+    --bs-link-hover-color: #e86e0c;
+}
+
+.btn-primary {
+    --bs-btn-bg: #fd7e14;
+    --bs-btn-border-color: #fd7e14;
+    --bs-btn-hover-bg: #e86e0c;
+    --bs-btn-hover-border-color: #e86e0c;
+    --bs-btn-active-bg: #df690a;
+    --bs-btn-active-border-color: #df690a;
+    --bs-btn-disabled-bg: #fd7e14;
+    --bs-btn-disabled-border-color: #fd7e14;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #fd7e14;
+    --bs-btn-border-color: #fd7e14;
+    --bs-btn-hover-bg: #fd7e14;
+    --bs-btn-hover-border-color: #fd7e14;
+    --bs-btn-active-bg: #fd7e14;
+    --bs-btn-active-border-color: #fd7e14;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.form-control:focus {
+    border-color: #fca054;
+    box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25);
+}

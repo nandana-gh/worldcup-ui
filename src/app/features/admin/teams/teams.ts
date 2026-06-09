@@ -45,11 +45,18 @@ export class TeamsComponent implements OnInit {
     });
   }
 
-  deleteTeam(id: number) {
-    if (confirm('Are you sure you want to delete this team?')) {
+  deactivateTeam(id: number) {
+    if (confirm('Are you sure you want to deactivate this team?')) {
       this.teamService.deleteTeam(id).subscribe(() => {
         this.loadTeams();
-        this.cdr.detectChanges();
+      });
+    }
+  }
+
+  activateTeam(id: number) {
+    if (confirm('Are you sure you want to reactivate this team?')) {
+      this.teamService.activateTeam(id).subscribe(() => {
+        this.loadTeams();
       });
     }
   }

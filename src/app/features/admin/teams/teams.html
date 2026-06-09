@@ -34,7 +34,8 @@
         <td>{{ team.teamCode }}</td>
         <td>{{ team.isActive ? 'Active' : 'Inactive' }}</td>
         <td>
-          <button class="btn btn-sm btn-danger" (click)="deleteTeam(team.teamId)">Delete</button>
+          <button *ngIf="team.isActive" class="btn btn-sm btn-danger" (click)="deactivateTeam(team.teamId)">Deactivate</button>
+          <button *ngIf="!team.isActive" class="btn btn-sm btn-success" (click)="activateTeam(team.teamId)">Reactivate</button>
         </td>
       </tr>
     </tbody>
