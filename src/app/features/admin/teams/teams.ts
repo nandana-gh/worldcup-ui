@@ -12,7 +12,7 @@ import { TeamService } from '../../../core/services/team.service';
 })
 export class TeamsComponent implements OnInit {
   teams: any[] = [];
-  newTeam: any = { teamName: '', teamCode: '', groupName: '', flagImageUrl: '', description: '', isActive: true };
+  newTeam: any = { teamName: '', teamCode: '', description: '', isActive: true };
   errorMessage = '';
 
   constructor(
@@ -35,7 +35,7 @@ export class TeamsComponent implements OnInit {
     this.teamService.createTeam(this.newTeam).subscribe({
       next: () => {
         this.loadTeams();
-        this.newTeam = { teamName: '', teamCode: '', groupName: '', flagImageUrl: '', description: '', isActive: true };
+        this.newTeam = { teamName: '', teamCode: '', description: '', isActive: true };
         this.cdr.detectChanges();
       },
       error: (err) => {
