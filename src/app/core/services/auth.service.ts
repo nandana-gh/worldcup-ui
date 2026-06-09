@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7198/api/auth'; // Default ASP.NET Core HTTPS port
+  private apiUrl = 'http://localhost:5213/api/auth';
   private authStatusSubject = new BehaviorSubject<boolean>(this.hasToken());
   private roleSubject = new BehaviorSubject<string>(this.getRoleFromToken());
 

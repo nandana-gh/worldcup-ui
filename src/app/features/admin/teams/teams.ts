@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TeamService } from '../../../core/services/team.service';
@@ -15,14 +15,20 @@ export class TeamsComponent implements OnInit {
   newTeam: any = { teamName: '', teamCode: '', groupName: '', flagImageUrl: '', description: '', isActive: true };
   errorMessage = '';
 
-  constructor(private teamService: TeamService) {}
+  constructor(
+    private teamService: TeamService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadTeams();
   }
 
   loadTeams() {
-    this.teamService.getAllTeams().subscribe(t => this.teams = t);
+    this.teamService.getAllTeams().subscribe(t => {
+      this.teams = t;
+      this.cdr.detectChanges();
+    });
   }
 
   createTeam() {
@@ -30,14 +36,21 @@ export class TeamsComponent implements OnInit {
       next: () => {
         this.loadTeams();
         this.newTeam = { teamName: '', teamCode: '', groupName: '', flagImageUrl: '', description: '', isActive: true };
+        this.cdr.detectChanges();
       },
-      error: (err) => this.errorMessage = err.error?.message || 'Failed to create team'
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Failed to create team';
+        this.cdr.detectChanges();
+      }
     });
   }
 
   deleteTeam(id: number) {
     if (confirm('Are you sure you want to delete this team?')) {
-      this.teamService.deleteTeam(id).subscribe(() => this.loadTeams());
+      this.teamService.deleteTeam(id).subscribe(() => {
+        this.loadTeams();
+        this.cdr.detectChanges();
+      });
     }
   }
 }

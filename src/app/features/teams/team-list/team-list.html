@@ -8,6 +8,12 @@
     You have already cast your vote. Check <a routerLink="/my-vote">My Vote</a> to see it.
   </div>
 
+  <div *ngIf="!errorMessage && teams.length === 0" class="text-center mt-5 text-muted">
+    <i class="bi bi-inbox fs-1"></i>
+    <h4>No Teams Available</h4>
+    <p>The admin hasn't added any teams to vote on yet. Check back later!</p>
+  </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
     <div class="col" *ngFor="let team of teams">
       <div class="card h-100 shadow-sm">

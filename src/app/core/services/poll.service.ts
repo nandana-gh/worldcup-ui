@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PollService {
-  private apiUrl = 'https://localhost:7198/api/polls';
+  private apiUrl = 'http://localhost:5213/api/polls';
 
   constructor(private http: HttpClient) {}
 
@@ -15,10 +15,10 @@ export class PollService {
   }
 
   getMyVote(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/my-vote`);
+    return this.http.get<any>(`${this.apiUrl}/my-vote?cb=${new Date().getTime()}`);
   }
 
   getResults(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/results`);
+    return this.http.get<any>(`${this.apiUrl}/results?cb=${new Date().getTime()}`);
   }
 }

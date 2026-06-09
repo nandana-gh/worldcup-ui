@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ResultService } from '../../../core/services/result.service';
@@ -17,16 +17,28 @@ export class DashboardComponent implements OnInit {
   polls: any[] = [];
   errorMessage = '';
 
-  constructor(private resultService: ResultService) {}
+  constructor(
+    private resultService: ResultService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadData();
   }
 
   loadData() {
-    this.resultService.getSettings().subscribe(s => this.settings = s);
-    this.resultService.getAllUsers().subscribe(u => this.users = u);
-    this.resultService.getAllPolls().subscribe(p => this.polls = p);
+    this.resultService.getSettings().subscribe(s => {
+      this.settings = s;
+      this.cdr.detectChanges();
+    });
+    this.resultService.getAllUsers().subscribe(u => {
+      this.users = u;
+      this.cdr.detectChanges();
+    });
+    this.resultService.getAllPolls().subscribe(p => {
+      this.polls = p;
+      this.cdr.detectChanges();
+    });
   }
 
   togglePublish() {

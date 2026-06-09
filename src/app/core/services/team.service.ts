@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TeamService {
-  private apiUrl = 'https://localhost:7198/api/teams';
+  private apiUrl = 'http://localhost:5213/api/teams';
 
   constructor(private http: HttpClient) {}
 
   getAllTeams(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(`${this.apiUrl}?cb=${new Date().getTime()}`);
   }
 
   getTeamById(id: number): Observable<any> {

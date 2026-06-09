@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PollService } from '../../../core/services/poll.service';
 
@@ -13,12 +13,21 @@ export class ResultPageComponent implements OnInit {
   results: any[] = [];
   errorMessage = '';
 
-  constructor(private pollService: PollService) {}
+  constructor(
+    private pollService: PollService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.pollService.getResults().subscribe({
-      next: (data) => this.results = data,
-      error: (err) => this.errorMessage = err.error?.message || 'Failed to load results. They might not be published yet.'
+      next: (data) => {
+        this.results = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Failed to load results. They might not be published yet.';
+        this.cdr.detectChanges();
+      }
     });
   }
 }

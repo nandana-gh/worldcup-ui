@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ResultService {
-  private adminUrl = 'https://localhost:7198/api/admin';
+  private adminUrl = 'http://localhost:5213/api/admin';
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +24,10 @@ export class ResultService {
 
   hideResults(): Observable<any> {
     return this.http.put<any>(`${this.adminUrl}/hide-results`, {});
+  }
+
+  getResults(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.adminUrl}/results?cb=${new Date().getTime()}`);
   }
 
   getAllPolls(): Observable<any[]> {

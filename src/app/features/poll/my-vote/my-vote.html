@@ -2,6 +2,11 @@
   <h2>My Vote</h2>
   <div *ngIf="errorMessage" class="alert alert-warning">{{ errorMessage }}</div>
   
+  <div *ngIf="!errorMessage && !vote" class="text-center mt-5 text-muted">
+    <h4>No Vote Found</h4>
+    <p>You haven't voted for any team yet. Go to <a routerLink="/teams">Vote Now</a> to pick your favorite!</p>
+  </div>
+
   <div *ngIf="vote && team" class="card mt-3 shadow-sm" style="max-width: 400px;">
     <img [src]="team.flagImageUrl" class="card-img-top" alt="Team Flag" *ngIf="team.flagImageUrl">
     <div class="card-body text-center">
